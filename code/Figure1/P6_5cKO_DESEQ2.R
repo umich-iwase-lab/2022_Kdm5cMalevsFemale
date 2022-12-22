@@ -37,7 +37,7 @@ SampleInfo <- read.csv("SampleInfo.csv", header=TRUE, sep=",", row.names=NULL)
 SampleInfo <- data.frame(SampleInfo)
 SampleInfo
 
-coldata = data.frame(row.names = SampleInfo$ï..Sample, sex = SampleInfo$Sex, genotype = SampleInfo$Genotype, type = c(rep("paired.end",16)))
+coldata = data.frame(row.names = SampleInfo$ï¿½..Sample, sex = SampleInfo$Sex, genotype = SampleInfo$Genotype, type = c(rep("paired.end",16)))
 
 #Which samples you want to compare, in this case we are comparing everything 
 SAMPLES = coldata$type == "paired.end"
@@ -344,7 +344,7 @@ write.table(p6maleonly, file="maleonly_DEG_a0.1.txt", sep="\t")
 
 
 ########################################################################################
-################ expression of all up DEGs in males vs females ############################
+################ expression of all up DEGs in males vs females #########################
 ################# to show sex-specific uniqueness and het loss #########################
 ########################################################################################
 
@@ -411,9 +411,8 @@ p6malefemale.up_l2fc_symb <- read.csv("Male_Female_UPdegs_L2fc_sym.txt", sep='\t
 p6malefemale.up_l2fc <- merge(Male_L2FC, Female_L2FC, by = "gene")
 p6malefemale.up_l2fc_symb <- merge(p6malefemale.up_l2fc, p6malefemale.up_l2fc_symb, by = "gene")
 
-#replace NAs with 0s
-# p6brainliver.pagetest_l2fc[is.na(p6brainliver.pagetest_l2fc)] <- 0
-
+#write this dataframe as a table
+write.table(p6malefemale.up_l2fc_symb, )
 
 pdf(file = "P6MalevsFemale_Brain_L2FC_scatter_empty.pdf",   # The directory you want to save the file in
     width = 5, # The width of the plot in inches
@@ -461,7 +460,25 @@ dev.off()
 
 
 
+##############################################################
+# Write a table with all the male vs female upregulated DEGs #
 
+#add the adjusted p-values and basemean
+female_padjbm <- subset(F5cHet_FWT.tb, F5cHet_FWT.tb$gene %in% p6malefemale.up_l2fc$gene)
+female_padjbm <- subset(female_padjbm, select = c("gene", "baseMean", "padj"))
+colnames(female_padjbm) <- c("gene", "baseMean", "Female_padj")
+
+male_padjbm <- subset(M5cKO_MWT.tb, M5cKO_MWT.tb$gene %in% p6malefemale.up_l2fc$gene)
+male_padjbm <- subset(male_padjbm, select = c("gene", "padj"))
+colnames(male_padjbm) <- c("gene", "Male_padj")
+
+#merge to final df
+MvsF_DEGs <- merge(p6malefemale.up_l2fc_symb, female_padjbm, by = "gene")
+MvsF_DEGs <- merge(MvsF_DEGs, male_padjbm, by = "gene")
+MvsF_DEGs <- subset(MvsF_DEGs, select = c("gene", "MGI", "baseMean", "sex", "Male_L2FC", "Male_padj", "Female_L2FC", "Female_padj"))
+colnames(MvsF_DEGs) <- c("Ensembl", "Symbol", "baseMean", "DEG_sex", "Male_L2FC", "Male_padj", "Female_L2FC", "Female_padj")
+
+write.table(MvsF_DEGs, file = "../../results/SupTable1_MalevsFemaleUPDEGs.csv", sep = ",", row.names = FALSE, col.names = TRUE)
 
 
 
