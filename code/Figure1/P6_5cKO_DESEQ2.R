@@ -407,12 +407,10 @@ Male_L2FC <- data.frame(gene = Male_L2FC$gene, Male_L2FC = Male_L2FC$log2FoldCha
 
 #merge males and females into one dataframe with labels
 p6malefemale.up_l2fc_symb <- read.csv("Male_Female_UPdegs_L2fc_sym.txt", sep='\t', header=T)
-
 p6malefemale.up_l2fc <- merge(Male_L2FC, Female_L2FC, by = "gene")
 p6malefemale.up_l2fc_symb <- merge(p6malefemale.up_l2fc, p6malefemale.up_l2fc_symb, by = "gene")
 
-#write this dataframe as a table
-write.table(p6malefemale.up_l2fc_symb, )
+
 
 pdf(file = "P6MalevsFemale_Brain_L2FC_scatter_empty.pdf",   # The directory you want to save the file in
     width = 5, # The width of the plot in inches
