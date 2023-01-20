@@ -1,0 +1,71 @@
+
+#21.09.28 to align KDM5C wt, het, and KO p6 brains using the Iwase Lab Apricot pipeline https://github.com/umich-iwase-lab/Apricot
+
+dirs:
+  input: /nfs/value/siwase2/BONEFAS/210928_P65cKO_maleandfemale
+  output: /nfs/value/siwase2/BONEFAS/210928_P65cKO_maleandfemale
+  reference: /scratch/iwase-lab/GENOMES/MM10 # the reference folder that contains genome fasta file and gtf file
+
+# These files/dirs assumed to be inside reference dir specified above
+genome_reference:
+  fasta: mm10.fa
+  gtf: gencode.vM21.annotation.gtf
+  star:
+    # star genome will be built if it doesn't exist
+    genome_dir: rsem_star_genome
+    #sjdbOverhang is optional; will default to read_length - 1
+    #sjdbOverhang: 149
+
+sequencing_parameters:
+  read_length: 150
+
+samples:
+  P61D_HIPCTX:
+    - P61D_HIPCTX_1.fq.gz
+    - P61D_HIPCTX_2.fq.gz
+  P61E_HIPCTX:
+    - P61E_HIPCTX_1.fq.gz
+    - P61E_HIPCTX_2.fq.gz
+  P62D_HIPCTX:
+    - P62D_HIPCTX_1.fq.gz
+    - P62D_HIPCTX_2.fq.gz
+  P62E_HIPCTX:
+    - P62E_HIPCTX_1.fq.gz
+    - P62E_HIPCTX_2.fq.gz
+  P63D_HIPCTX:
+    - P63D_HIPCTX_1.fq.gz
+    - P63D_HIPCTX_2.fq.gz
+  P63E_HIPCTX:
+    - P63E_HIPCTX_1.fq.gz
+    - P63E_HIPCTX_2.fq.gz
+  P64D_HIPCTX:
+    - P64D_HIPCTX_1.fq.gz
+    - P64D_HIPCTX_2.fq.gz
+  P64E_HIPCTX:
+    - P64E_HIPCTX_1.fq.gz
+    - P64E_HIPCTX_2.fq.gz
+  P65D_HIPCTX:
+    - P65D_HIPCTX_1.fq.gz
+    - P65D_HIPCTX_2.fq.gz
+  P65E_HIPCTX:
+    - P65E_HIPCTX_1.fq.gz
+    - P65E_HIPCTX_2.fq.gz
+  P66D_HIPCTX:
+    - P66D_HIPCTX_1.fq.gz
+    - P66D_HIPCTX_2.fq.gz
+  P66E_HIPCTX:
+    - P66E_HIPCTX_1.fq.gz
+    - P66E_HIPCTX_2.fq.gz
+  P67D_HIPCTX:
+    - P67D_HIPCTX_1.fq.gz
+    - P67D_HIPCTX_2.fq.gz
+  P68E_HIPCTX:
+    - P68E_HIPCTX_1.fq.gz
+    - P68E_HIPCTX_2.fq.gz
+  P69D_HIPCTX:
+    - P69D_HIPCTX_1.fq.gz
+    - P69D_HIPCTX_2.fq.gz
+  P69E_HIPCTX:
+    - P69E_HIPCTX_1.fq.gz
+    - P69E_HIPCTX_2.fq.gz
+# - SampleC
