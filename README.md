@@ -8,6 +8,6 @@ Chromatin dysregulation has emerged as a major hallmark of neurodevelopmental di
 
 ## Data
 * Male and female WT, Kdm5c-KO, and Kdm5c-Het P6 brains were sequenced on 21.09.28
-    * GEO: GSE206346
+    * GEO: GSE206346 https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE206346
 
 
